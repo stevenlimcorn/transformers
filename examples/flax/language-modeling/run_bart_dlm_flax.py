@@ -858,7 +858,7 @@ def main():
         num_train_samples = len(tokenized_datasets["train"])
         # Avoid using jax.numpy here in case of TPU training
         train_samples_idx = np.random.permutation(np.arange(num_train_samples))
-        train_batch_idx = generate_batch_splits(train_samples_idx, train_batch_size)
+        train_batch_idx = generate_batch_splits(train_samples_idx, train_batch_size, drop_last=False)
 
         # Gather the indexes for creating the batch and do a training step
         for step, batch_idx in enumerate(tqdm(train_batch_idx, desc="Training...", position=1)):
